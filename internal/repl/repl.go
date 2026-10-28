@@ -56,7 +56,25 @@ func GetCommands() map[string]CliCommand{
 		"inspect": {name: "inspect",
 		description: "Inspect your pokemon",
 		callback: commandInspect},
+
+		"pokedex": {name: "pokedex",
+		description: "Inspect your whole pokedex",
+		callback: commandPokedex},
 	}
+}
+
+func commandPokedex(cfg *Config, args ...string) error {
+
+	if len(cfg.Pokedex) == 0{
+		fmt.Println("Pokedex is empty!")
+		return nil
+	}
+
+	fmt.Println("Your Pokedex:")
+	for name := range cfg.Pokedex {
+		fmt.Printf(" - %s\n", name)
+	}
+	return nil
 }
 
 func commandInspect(cfg *Config, args ...string) error {
